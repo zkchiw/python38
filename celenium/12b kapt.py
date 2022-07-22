@@ -1,7 +1,7 @@
 # 아파트 단지 정보에서 주차장 정보 추출
 # k-apt.go.kr
 # 메인페이지 팝업창 닫기 => '단지정보' 클릭
-# => 2022.01, 서울, 강남구, 삼성동, 삼성래미안2차 클릭
+# => 2022.01, 서울, 강남구, 삼성동, 아이파크삼성동 클릭
 
 
 import time
@@ -82,16 +82,6 @@ time.sleep(2)
 
 
 # # 스크롤을 아래로 내리지 않으면 래미안 라클라시가 나옴
-# # 이 방식은 아님
-# 아이파크삼성동
-
-# 아파트 결과 목록 출력 1
-apts = chrome.find_elements(By.CSS_SELECTOR, 'p.aptS_rLName')
-
-for i in apts :
-    print(i.text)
-print(len(apts))
-
 # 아파트 결과 목록 출력 2
 html = BeautifulSoup(chrome.page_source, 'lxml')
 for apt in html.select('p.aptS_rLName'):
@@ -102,13 +92,30 @@ for apt in html.select('p.aptS_rLName'):
 
 idx = 1
 for j in html.select('p.aptS_rLName') :
-    if j.text =='삼성래미안2차':break
+    if j.text =='아이파크삼성동':break
     else : idx=idx+1
-print(idx) # 삼성래미안2차 5번째
+print(idx) # 아이파크삼성동 16번째
+
+# 결과 목록 각 항목 높이 알아내기
+elm = chrome.find_element(By.CSS_SELECTOR, '#mCSB_2_container ul li:nth-child(1)')
+print(elm.size['height'])
+
+
+# 자동 스크롤 기능 구현
+# 결과목록 각 항목 높이 : 대충 70px
+# 현재 화면에 출력된 결과 목록 수 : 7개
+# 아이파크삼성동의 인덱스 : 16
+elm = chrome.find_element(By.CSS_SELECTOR, '#mCSB_2_container')
+# 스크롤하면 스타일의 top값이 바뀜 (0~-478)
+# 셀레니움을 이용해서 스타일을 제어 가능
+# pos = '-600px'
+pos ='-'+str(int((idx-7) * 70)) + 'px'
+chrome.execute_script(f'arguments[0].style="position:relative; top:{pos}; left:0;"',elm)
+time.sleep(2)
 
 # 스크롤을 끝까지 내리지 않으면 오류나서 실행되지 않음
-remian = f'#mCSB_2_container ul li:nth-child({idx}) a'
-chrome.find_element(By.CSS_SELECTOR, remian).click()
+ipark = f'#mCSB_2_container ul li:nth-child({idx}) a'
+chrome.find_element(By.CSS_SELECTOR, ipark).click()
 time.sleep(4)
 
 
