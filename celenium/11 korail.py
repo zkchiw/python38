@@ -154,6 +154,12 @@ chrome.find_element(By.XPATH, "//input[@title='전체']").click() # 아산에는
 chrome.find_element(By.CLASS_NAME, 'btn_inq').click()
 time.sleep(1)
 
+# 조회하면 아래로 스크롤
+# 브라우저의 특정 액션은 자바스크립트 코드를 이용해서 처리
+# chrome.execute_script(실행할 코드)
+chrome.execute_script('window.scrollTo(0, 1000);')
+time.sleep(1)
+
 
 # 승차권 예매버튼
 # 서울-아산은 환승만있어서 2개버튼 눌러야 예약 가능함
