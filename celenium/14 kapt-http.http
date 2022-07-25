@@ -1,0 +1,12 @@
+#http://k-apt.go.kr/cmmn/bjd/getBjdList.do?bjd_gbn=SIDO
+#params = {'bjd_code':'','bjd_gbn':'SIDO'}
+
+#http://k-apt.go.kr/cmmn/bjd/getBjdList.do?bjd_gbn=SGG&bjd_code=11
+#params = {'bjd_code':'11', 'bjd_gbn':'SGG'}
+
+#http://k-apt.go.kr/cmmn/bjd/getBjdList.do?bjd_gbn=EMD&bjd_code=11680
+#params = {'bjd_code':'11680', 'bjd_gbn':'EMD'}
+
+#http://k-apt.go.kr/kaptinfo/openkaptinfo.do?bjd_code=1168010500&kapt_code=A13509003&search_date=202206
+
+http://k-apt.go.kr/cmmn/selectKapt.do?go_url=/kaptinfo/openkaptinfo.do&bjd_code=1168010500&kapt_code=A13509003&search_date=202206&kapt_usedate=&kapt_name=
